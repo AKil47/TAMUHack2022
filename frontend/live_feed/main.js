@@ -1,3 +1,6 @@
+const firebase = require("firebase");
+require("firebase/firestore");
+
 const { app, BrowserWindow } = require('electron')
 
 const createWindow = () => {
