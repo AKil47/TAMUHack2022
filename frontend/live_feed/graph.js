@@ -1,48 +1,88 @@
-let myChart = document.getElementById('myChart').getContext('2d');
-let myData = [1, 10, 3, 6, 2, 1, 7, 8]
+import { Chart } from "/chart.js"
+import { get_call_data } from "/firebase.js"
 
-let massPopChart = new Chart(myChart, {
-    type: 'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-    data: {
-        labels: ['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
-        datasets: [{
-            label: 'Population',
-            data: myData,
-            //backgroundColor: 'Red'
-            backgroundColor: [
-                'Red',
-                'Orange',
-                'Yellow',
-                'Green',
-                'Blue',
-                'Violet',
-            ],
-            borderWidth: 1,
-            borderColor: 'Black',
-            hoverBorderWidth: '2',
-            hoverBorderColor: 'Grey'
-        }]
-    },
+let myChart = document.getElementById('myChart').getContext('2d');
+let lineChart = new Chart(myChart, config);
+
+const raw = await get_call_data('call_1');
+
+const data = {
+  labels: getTimestamps(raw),
+  datasets: [{
+    label: 'bored',
+    backgroundColor: 'Red',
+    borderColor: 'Red',
+    fill: false,
+    data: getBored(raw),
+  }, {
+    label: 'happy',
+    backgroundColor: 'Blue',
+    borderColor: 'Blue',
+    fill: false,
+    data: getSad(raw),
+  }, {
+    label: 'sad',
+    backgroundColor: 'Green',
+    borderColor: 'Green',
+    fill: false,
+    data: getHappy(raw),
+  }]
+};
+
+const config = {
+    type: 'line',
+    data: data,
     options: {
-        title: {
-            display: true,
-            text: 'Largest Cities in Massachusetts',
-            fontSize: 25
-        },
         plugins: {
-            legend: {
-                position: 'right',
-                title: {
-                    display: true,
-                    text: 'Legend Title',
-                }
+            title: {
+                text: 'Chart.js Time Scale',
+                display: true
             }
         },
-        padding: {
-            left: 100,
-            right: 0,
-            bottom: 0,
-            top: 0
+        scales: {
+            x: {
+                type: 'time',
+                time: {
+                    // Luxon format string
+                    tooltipFormat: 'DD T'
+                },
+                title: {
+                    display: true,
+                    text: 'Date'
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'value'
+                }
+            },
         }
     }
-});
+};
+
+function addPoint() {
+    myData[myData.length] = Math.random();
+    lineChart.update()
+    console.log('here');
+}
+
+function getTimestamps(data) {
+    const timestamps = data["timestamps"];
+    return Object.values(timestamps).map(stamp => stamp.seconds);
+}
+
+function getBored(data) {
+    const bored = data["bored"];
+    return Object.values(bored);
+}
+
+function getHappy(data) {
+    const sad = data["sad"];
+    return Object.values(sad);
+}
+
+function getSad(data) {
+    const happy = data["happy"];
+    return Object.values(happy);
+}

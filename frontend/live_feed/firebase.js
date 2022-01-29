@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js'
-import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore.js'
+import { getFirestore, collection, getDocs, doc, getDoc } from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore.js'
 
 
 
@@ -18,13 +18,9 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore();
 
-async function get() {
-  const querySnapshot = await getDocs(collection(db, "timestamps"));
-  console.log("done")
+export async function get_call_data(call_id) {
+    const docRef = doc(db, "user_1", call_id);
+    const docSnap = await getDoc(docRef);
 
-  querySnapshot.forEach((doc) => {
-    console.log(`${doc.id} => ${doc.data()[10]}`);
-  });
+    return docSnap.data();
 }
-
-await get()
