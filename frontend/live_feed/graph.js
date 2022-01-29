@@ -3,81 +3,40 @@ import { get_call_data } from "/firebase.js"
 
 let myChart = document.getElementById('myChart').getContext('2d');
 
-const raw = await get_call_data('call_1');
+const raw = await get_call_data('user_1');
 
-const data = {
-  labels: getTimestamps(raw),
-  datasets: [{
-    label: 'bored',
-    backgroundColor: 'Red',
-    borderColor: 'Red',
-    fill: false,
-    data: getBored(raw),
-  }, {
-    label: 'happy',
-    backgroundColor: 'Blue',
-    borderColor: 'Blue',
-    fill: false,
-    data: getSad(raw),
-  }, {
-    label: 'sad',
-    backgroundColor: 'Green',
-    borderColor: 'Green',
-    fill: false,
-    data: getHappy(raw),
-  }]
-};
+const data = [getBored(raw), getHappy(raw), getSad(raw)];
 
 const config = {
     type: 'doughnut',
     data: data,
     options: {
-        plugins: {
-            title: {
-                text: 'Chart.js Time Scale',
-                display: true
-            }
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
         },
-        scales: {
-            x: {
-                type: 'time',
-                time: {
-                    // Luxon format string
-                    tooltipFormat: 'DD T'
-                },
-                title: {
-                    display: true,
-                    text: 'Date'
-                }
-            },
-            y: {
-                title: {
-                    display: true,
-                    text: 'value'
-                }
-            },
+        title: {
+          display: true,
+          text: 'Chart.js Doughnut Chart'
         }
-    }
-};
+      }
+    },
+  };
 
-let lineChart = new Chart(myChart, config);
-
-function getTimestamps(data) {
-    const timestamps = data["timestamps"];
-    return Object.values(timestamps).map(stamp => stamp.seconds*1000);
-}
+let donut = new Chart(myChart, config);
 
 function getBored(data) {
     const bored = data["bored"];
-    return Object.values(bored);
+    return bored[bored.length - 1];
 }
 
 function getHappy(data) {
     const sad = data["sad"];
-    return Object.values(sad);
+    return sad[sad.length - 1];
 }
 
 function getSad(data) {
     const happy = data["happy"];
-    return Object.values(happy);
+    return happy[happy.length - 1];
 }
