@@ -10,5 +10,8 @@
   },
   "devDependencies": {
     "electron": "^16.0.8"
+  },
+  "dependencies": {
+    "firebase": "^8.10.0"
   }
 }

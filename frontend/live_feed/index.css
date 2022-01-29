@@ -3,3 +3,13 @@
     --plex: 'IBM Plex Sans', sans-serif;
     --fira: 'Fira Code', monospace;
 }
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-family: var(--plex);
+    color: black;
+}
