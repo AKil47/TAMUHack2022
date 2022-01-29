@@ -1,8 +1,7 @@
-import { Chart } from "/chart.js"
+// import { Chart } from "/chart.js"
 import { get_call_data } from "/firebase.js"
 
 let myChart = document.getElementById('myChart').getContext('2d');
-let lineChart = new Chart(myChart, config);
 
 const raw = await get_call_data('call_1');
 
@@ -30,7 +29,7 @@ const data = {
 };
 
 const config = {
-    type: 'line',
+    type: 'doughnut',
     data: data,
     options: {
         plugins: {
@@ -61,15 +60,11 @@ const config = {
     }
 };
 
-function addPoint() {
-    myData[myData.length] = Math.random();
-    lineChart.update()
-    console.log('here');
-}
+let lineChart = new Chart(myChart, config);
 
 function getTimestamps(data) {
     const timestamps = data["timestamps"];
-    return Object.values(timestamps).map(stamp => stamp.seconds);
+    return Object.values(timestamps).map(stamp => stamp.seconds*1000);
 }
 
 function getBored(data) {
