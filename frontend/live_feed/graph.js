@@ -9,7 +9,7 @@ const data = {
     labels: ['Bored', 'Sad', 'Happy'],
     datasets: [
         {
-            label: 'Bored',
+            label: 'Emotions',
             data: [getPercentage(getBored(raw)), getPercentage(getSad(raw)), getPercentage(getHappy(raw))],
             backgroundColor: ['Red', 'Pink', 'Violet']
         },
@@ -29,7 +29,7 @@ const config = {
           display: true,
           text: 'Chart.js Doughnut Chart'
         }
-      }
+      },
     },
   };
 
