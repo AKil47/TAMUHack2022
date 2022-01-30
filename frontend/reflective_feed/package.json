@@ -12,6 +12,7 @@
     "electron": "^16.0.8"
   },
   "dependencies": {
+    "chart.js": "^3.7.0",
     "firebase": "^8.10.0"
   }
 }
