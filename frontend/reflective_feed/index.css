@@ -13,3 +13,17 @@ h1 {
     font-family: var(--plex);
     color: black;
 }
+
+#logo {
+    display: flex;
+    justify-content: center;
+}
+
+#logo img {
+    margin: 0;
+    padding: 0;
+    width: 50%;
+    height: auto;
+    margin-top: -10%;
+    margin-bottom: -10%;
+}
