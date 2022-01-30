@@ -5,41 +5,41 @@ let myChart = document.getElementById('myChart').getContext('2d');
 
 const raw = await get_call_data('call_2');
 
-console.log(raw)
-
 const lines = {
-    "drowsy": {"values": raw["drowsy"],"color": "#f77cb0"},
-    "sad": {"values": raw["sad"], "color": "#5b2574"},
-    "engaged": {"values": raw["engaged"], "color": "#a73c78"},
-    "happy": {"values": raw["happy"], "color": "#e96091"}
+    "Drowsy": {"values": raw["Drowsy"],"color": "#f77cb0"},
+    "Sad": {"values": raw["Sad"], "color": "#5b2574"},
+    "Engaged": {"values": raw["Engaged"], "color": "#a73c78"},
+    "Happy": {"values": raw["Happy"], "color": "#e96091"}
 }
 
+console.log(raw);
+
 const data = {
-  labels: getTimestamps(raw),
+  labels: raw["Timestamp"],
   datasets: [{
     label: 'Drowsy',
-    backgroundColor: lines['drowsy'].color,
-    borderColor: lines['drowsy'].color,
+    backgroundColor: lines['Drowsy'].color,
+    borderColor: lines['Drowsy'].color,
     fill: false,
-    data: lines['drowsy'].values,
+    data: lines['Drowsy'].values,
   }, {
     label: 'Happy',
-    backgroundColor: lines['happy'].color,
-    borderColor: lines['happy'].color,
+    backgroundColor: lines['Happy'].color,
+    borderColor: lines['Happy'].color,
     fill: false,
-    data: lines['happy'].values,
+    data: lines['Happy'].values,
   }, {
     label: 'Sad',
-    backgroundColor: lines['sad'].color,
-    borderColor: lines['sad'].color,
+    backgroundColor: lines['Sad'].color,
+    borderColor: lines['Sad'].color,
     fill: false,
-    data: lines['sad'].values,
+    data: lines['Sad'].values,
   }, {
     label: 'Engaged',
-    backgroundColor: lines['engaged'].color,
-    borderColor: lines['engaged'].color,
+    backgroundColor: lines['Engaged'].color,
+    borderColor: lines['Engaged'].color,
     fill: false,
-    data: lines['engaged'].values,
+    data: lines['Engaged'].values,
   }]
 };
 
@@ -72,8 +72,3 @@ const config = {
 };
 
 let lineChart = new Chart(myChart, config);
-
-function getTimestamps(data) {
-    const timestamps = data["timestamps"];
-    return Object.values(timestamps).map(stamp => stamp.seconds*1000);
-}
