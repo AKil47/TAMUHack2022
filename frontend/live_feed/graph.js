@@ -43,7 +43,6 @@ const config = {
 
 let bigboyDonut = new Chart(myChart, config);
 
-
 function getEmotions(data, emotions) {
     const vals = [];
     for (let emotion of emotions) {
