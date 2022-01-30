@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js'
-import { getFirestore, collection, getDocs, doc, getDoc } from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore.js'
+import { getFirestore, collection, getDocs, doc, getDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/9.6.5/firebase-firestore.js'
 
 const firebaseConfig = {
   apiKey: "AIzaSyD9Gs-iOkKLbSbmvgsKlC2YprAtDkdO_f0",
@@ -22,3 +22,7 @@ export async function get_call_data(call_id) {
 
     return docSnap.data();
 }
+
+const unsub = onSnapshot(doc(db, "user_1", "call_1"), doc => {
+  console.log(doc.data())
+})
