@@ -5,12 +5,20 @@ let myChart = document.getElementById('myChart').getContext('2d');
 
 const raw = await get_call_data('call_1');
 
+const emotions = [];
+
+for (let e of Object.keys(raw)) {
+    if (e != "timestamps") {
+        emotions.push(e);
+    }
+}
+
 const data = {
-    labels: ['Bored', 'Sad', 'Happy'],
+    labels: emotions,
     datasets: [
         {
             label: 'Emotions',
-            data: [getPercentage(getBored(raw)), getPercentage(getSad(raw)), getPercentage(getHappy(raw))],
+            data: getEmotions(raw, emotions),
             backgroundColor: ['Red', 'Pink', 'Violet']
         },
     ]
@@ -27,7 +35,7 @@ const config = {
         },
         title: {
           display: true,
-          text: 'Chart.js Doughnut Chart'
+          text: 'we are donuts bum bum bum bum bum bum bum bum bum'
         }
       },
     },
@@ -35,22 +43,12 @@ const config = {
 
 let bigboyDonut = new Chart(myChart, config);
 
-function getBored(data) {
-    const bored = data["bored"];
-    return bored[bored.length - 1];
-}
 
-function getHappy(data) {
-    const sad = data["sad"];
-    return sad[sad.length - 1];
-}
+function getEmotions(data, emotions) {
+    const vals = [];
+    for (let emotion of emotions) {
+        vals.push(Object.values(data[emotion])[Object.values(data[emotion]).length - 1]);
+    }
 
-function getSad(data) {
-    const happy = data["happy"];
-    return happy[happy.length - 1];
-}
-
-function getPercentage(num) {
-    const sum = getBored(raw) + getSad(raw) + getHappy(raw);
-    return (num / sum) * 100;
+    return vals;
 }
