@@ -1,30 +1,43 @@
 // import { Chart } from "/chart.js"
-import { get_call_data } from "/firebase.js"
+import { get_call_data } from "./firebase.js"
 
 let myChart = document.getElementById('myChart').getContext('2d');
 
 const raw = await get_call_data('call_1');
 
+const lines = {
+    "drowsy": {"values": Object.values(raw["drowsy"]),"color": "#f77cb0"},
+    "sad": {"values": Object.values(raw["sad"]), "color": "#5b2574"},
+    "engaged": {"values": Object.values(raw["engaged"]), "color": "#a73c78"},
+    "happy": {"values": Object.values(raw["happy"]), "color": "#e96091"}
+}
+
 const data = {
   labels: getTimestamps(raw),
   datasets: [{
-    label: 'bored',
-    backgroundColor: 'Red',
-    borderColor: 'Red',
+    label: 'Drowsy',
+    backgroundColor: lines['drowsy'].color,
+    borderColor: lines['drowsy'].color,
     fill: false,
-    data: getBored(raw),
+    data: lines['drowsy'].values,
   }, {
-    label: 'happy',
-    backgroundColor: 'Blue',
-    borderColor: 'Blue',
+    label: 'Happy',
+    backgroundColor: lines['happy'].color,
+    borderColor: lines['happy'].color,
     fill: false,
-    data: getSad(raw),
+    data: lines['happy'].values,
   }, {
-    label: 'sad',
-    backgroundColor: 'Green',
-    borderColor: 'Green',
+    label: 'Sad',
+    backgroundColor: lines['sad'].color,
+    borderColor: lines['sad'].color,
     fill: false,
-    data: getHappy(raw),
+    data: lines['sad'].values,
+  }, {
+    label: 'Engaged',
+    backgroundColor: lines['engaged'].color,
+    borderColor: lines['engaged'].color,
+    fill: false,
+    data: lines['engaged'].values,
   }]
 };
 
@@ -34,29 +47,25 @@ const config = {
     options: {
         plugins: {
             title: {
-                text: 'Chart.js Time Scale',
+                text: 'Emotions over Time',
                 display: true
             }
         },
         scales: {
             x: {
                 type: 'time',
-                time: {
-                    // Luxon format string
-                    tooltipFormat: 'DD T'
-                },
                 title: {
                     display: true,
-                    text: 'Date'
+                    text: 'Time'
                 }
             },
             y: {
                 title: {
                     display: true,
-                    text: 'value'
+                    text: '%'
                 }
             },
-        }
+        },
     }
 };
 
@@ -65,19 +74,4 @@ let lineChart = new Chart(myChart, config);
 function getTimestamps(data) {
     const timestamps = data["timestamps"];
     return Object.values(timestamps).map(stamp => stamp.seconds*1000);
-}
-
-function getBored(data) {
-    const bored = data["bored"];
-    return Object.values(bored);
-}
-
-function getHappy(data) {
-    const sad = data["sad"];
-    return Object.values(sad);
-}
-
-function getSad(data) {
-    const happy = data["happy"];
-    return Object.values(happy);
 }

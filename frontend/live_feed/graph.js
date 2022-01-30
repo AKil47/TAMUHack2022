@@ -4,10 +4,10 @@ import { get_call_data } from "./firebase.js"
 const raw = await get_call_data('call_1');
 
 const donuts = {
-    "donut_1": {"color": "#5b2574", "emotion": "sad"},
-    "donut_2": {"color": "#a73c78", "emotion": "engaged"},
-    "donut_3": {"color": "#e96091", "emotion": "happy"},
-    "donut_4": {"color": "#f77cb0", "emotion": "drowsy"}
+    "donut_1": {"color": "#5b2574", "emotion": "Sad"},
+    "donut_2": {"color": "#a73c78", "emotion": "Engaged"},
+    "donut_3": {"color": "#e96091", "emotion": "Happy"},
+    "donut_4": {"color": "#f77cb0", "emotion": "Drowsy"}
 }
 
 let donut_id = 'donut_1';
