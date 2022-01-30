@@ -24,11 +24,11 @@
 
 <body>
     <div class = "donuts">
-        <div style = "position: relative; height: 200px; display: grid; grid-template-columns: repeat(2, 17%); grid-row-gap: 20%;">
-            <canvas id = "donut_1"></canvas>
-            <canvas id = "donut_2"></canvas>
-            <canvas id = "donut_3"></canvas>
-            <canvas id = "donut_4"></canvas>
+        <div>
+            <div><canvas id = "donut_1"></canvas></div>
+            <div><canvas id = "donut_2"></canvas></div>
+            <div><canvas id = "donut_3"></canvas></div>
+            <div><canvas id = "donut_4"></canvas></div>
             <!-- <canvas id = "donut_5"></canvas>
             <canvas id = "donut_6"></canvas>
             <canvas id = "donut_7"></canvas>
@@ -40,6 +40,7 @@
         </div>
     </div>
     
+    <base href="./">
     <script src = "firebase.js" type="module"></script>
     <script src = "graph.js" type = "module"></script>
     <!-- <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>

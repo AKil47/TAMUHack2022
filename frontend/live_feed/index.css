@@ -13,3 +13,9 @@ h1 {
     font-family: var(--plex);
     color: black;
 }
+
+canvas {
+    width: 100vw !important;
+    height: 100vw !important;
+    margin-top: 10% !important;
+}

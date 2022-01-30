@@ -12,6 +12,7 @@
     "electron": "^16.0.8"
   },
   "dependencies": {
-    "firebase": "^8.10.0"
+    "firebase": "^8.10.1",
+    "firestore": "^1.1.6"
   }
 }

@@ -1,11 +1,11 @@
 // import { Chart } from "/chart.js"
-import { get_call_data } from "/firebase.js"
+import { get_call_data } from "./firebase.js"
 
 const raw = await get_call_data('call_1');
 
 const donuts = {
     "donut_1": {"color": "#5b2574", "emotion": "sad"},
-    "donut_2": {"color": "#a73c78", "emotion": "bored"},
+    "donut_2": {"color": "#a73c78", "emotion": "engaged"},
     "donut_3": {"color": "#e96091", "emotion": "happy"},
     "donut_4": {"color": "#f77cb0", "emotion": "drowsy"}
 }
@@ -37,7 +37,6 @@ let donut = new Chart(donut_1, {
                 text: 'we are donuts bum bum bum bum bum bum bum bum bum'
             }
         },
-        events: ['mouseout']
     }
 });
 
@@ -67,7 +66,6 @@ donut = new Chart(donut_2, {
                 text: 'we are donuts bum bum bum bum bum bum bum bum bum'
             }
         },
-        events: ['mouseout']
     }
 });
 
@@ -97,7 +95,6 @@ donut = new Chart(donut_3, {
                 text: 'we are donuts bum bum bum bum bum bum bum bum bum'
             }
         },
-        events: ['mouseout']
     }
 });
 
@@ -127,6 +124,5 @@ donut = new Chart(donut_4, {
                 text: 'we are donuts bum bum bum bum bum bum bum bum bum'
             }
         },
-        events: ['mouseout']
     }
 });
