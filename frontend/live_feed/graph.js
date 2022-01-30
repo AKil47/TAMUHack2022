@@ -3,9 +3,18 @@ import { get_call_data } from "/firebase.js"
 
 let myChart = document.getElementById('myChart').getContext('2d');
 
-const raw = await get_call_data('user_1');
+const raw = await get_call_data('call_1');
 
-const data = [getBored(raw), getHappy(raw), getSad(raw)];
+const data = {
+    labels: ['Bored', 'Sad', 'Happy'],
+    datasets: [
+        {
+            label: 'Bored',
+            data: [getPercentage(getBored(raw)), getPercentage(getSad(raw)), getPercentage(getHappy(raw))],
+            backgroundColor: ['Red', 'Pink', 'Violet']
+        },
+    ]
+}
 
 const config = {
     type: 'doughnut',
@@ -24,7 +33,7 @@ const config = {
     },
   };
 
-let donut = new Chart(myChart, config);
+let bigboyDonut = new Chart(myChart, config);
 
 function getBored(data) {
     const bored = data["bored"];
@@ -39,4 +48,9 @@ function getHappy(data) {
 function getSad(data) {
     const happy = data["happy"];
     return happy[happy.length - 1];
+}
+
+function getPercentage(num) {
+    const sum = getBored(raw) + getSad(raw) + getHappy(raw);
+    return (num / sum) * 100;
 }
