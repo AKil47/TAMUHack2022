@@ -3,13 +3,15 @@ import { get_call_data } from "./firebase.js"
 
 let myChart = document.getElementById('myChart').getContext('2d');
 
-const raw = await get_call_data('call_1');
+const raw = await get_call_data('call_2');
+
+console.log(raw)
 
 const lines = {
-    "drowsy": {"values": Object.values(raw["drowsy"]),"color": "#f77cb0"},
-    "sad": {"values": Object.values(raw["sad"]), "color": "#5b2574"},
-    "engaged": {"values": Object.values(raw["engaged"]), "color": "#a73c78"},
-    "happy": {"values": Object.values(raw["happy"]), "color": "#e96091"}
+    "drowsy": {"values": raw["drowsy"],"color": "#f77cb0"},
+    "sad": {"values": raw["sad"], "color": "#5b2574"},
+    "engaged": {"values": raw["engaged"], "color": "#a73c78"},
+    "happy": {"values": raw["happy"], "color": "#e96091"}
 }
 
 const data = {
